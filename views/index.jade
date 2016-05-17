@@ -10,18 +10,15 @@ html
     body
         h1 ChitChat
         div
-            div#messages.inlineBlock
-            div.inlineBlock.topAligned
-                b Participants
-                br
-                div#participants
-        div
             div.inlineBlock
                 span Your name:
                     input(type="text", value="Anonymous")#name
                 br
-                div#footer
-                    form#messageForm
-                        textarea(rows="4", cols="55", placeholder="Type your message, then press Enter", maxlength=200)#outgoingMessage
-                        //input(type="button", value="Share", disabled=true)#send
+                form#messageForm
+                    textarea(rows="4", cols="50", placeholder="Press Enter to share something!", maxlength=200)#outgoingMessage
+            div.inlineBlock.topAligned
+                b Participants
+                br
+                div#participants
+        div#messages
             
