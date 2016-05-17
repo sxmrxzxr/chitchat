@@ -17,7 +17,7 @@ app.set("view engine", "jade");
 
 app.use(express.static("public", __dirname + "/public"));
 app.use(cookieParser());
-app.use(session({secret: '1234567890QWERTY'}));
+//app.use(session({secret: '1234567890QWERTY'}));
 app.use(bodyParser.json());
 
 app.get("/", function (request, response) {
