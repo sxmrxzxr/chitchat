@@ -1,0 +1,31 @@
+body {
+    padding: 3em;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1em;
+}
+
+textarea {
+    resize: none;
+}
+
+.flex {
+    display: flex;
+}
+
+.inlineBlock {
+    display: inline-block;
+}
+
+.topAligned {
+    vertical-align: top;
+}
+
+.scroll {
+    overflow: scroll;
+    word-wrap: break-word;
+}
+
+#messages {
+    max-width: 400px;
+    max-height: 600px;
+}

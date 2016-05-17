@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/index.js"></script>
+    <title>ChitChat</title>
+  </head>
+  <body>
+    <h1>ChitChat</h1>
+    <div>
+      <div class="inlineBlock"><span>Your Name:
+          <input type="text" value="Anonymous" id="name"></span><br>
+        <form id="messageForm">
+          <textarea rows="4" cols="50" placeholder="share something" maxLength="200" id="outgoingMessage"></textarea>
+          <input type="button" value="Share" disabled id="send">
+        </form>
+      </div>
+      <div class="inlineBlock topAligned"><b>Participants</b><br>
+        <div id="participants"></div>
+      </div>
+    </div>
+    <div id="messages"></div>
+  </body>
+</html>
