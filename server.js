@@ -63,13 +63,18 @@ io.on("connection", function (socket) {
     });
 
     socket.on("nameChange", function (data) {
+        var oN = _.findWhere(participants, {
+            id: socket.id
+        }).name;
         _.findWhere(participants, {
             id: socket.id
         }).name = data.name;
         io.sockets.emit("nameChanged", {
             id: data.id,
-            name: data.name
+            name: data.name,
+            oldName: oN
         });
+        //console.log(oN);
     });
 
     socket.on("disconnect", function () {
@@ -82,7 +87,7 @@ io.on("connection", function (socket) {
         });
     });
     
-    console.log(participants)
+    //console.log(participants)
 });
 
 http.listen(app.get("port"), app.get("ipaddr"), function () {

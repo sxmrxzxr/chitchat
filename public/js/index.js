@@ -31,6 +31,7 @@ function init() {
 
     socket.on('nameChanged', function (data) {
         $('#' + data.id).html(data.name + ' ' + (data.id === sessionId ? '(You)' : '') + '<br />');
+        $('#messages').append('<b>' + data.oldName + '</b> has changed their name to <b>' + data.name + '</b> <br />');
     });
 
     socket.on('incomingMessage', function (data) {
