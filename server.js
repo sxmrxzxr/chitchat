@@ -4,8 +4,11 @@ var http = require("http").createServer(app);
 var bodyParser = require("body-parser");
 var io = require("socket.io").listen(http);
 var _ = require("underscore");
+var cookieParser = require("cookie-parser");
+var session = require("express-session");
 
 var participants = [];
+var seshCookie = "";
 
 app.set("ipaddr", "127.0.0.1");
 app.set("port", 8080);
@@ -13,10 +16,14 @@ app.set("views", __dirname + "/views");
 app.set("view engine", "jade");
 
 app.use(express.static("public", __dirname + "/public"));
+app.use(cookieParser());
+app.use(session({secret: '1234567890QWERTY'}));
 app.use(bodyParser.json());
 
 app.get("/", function (request, response) {
     response.render("index");
+    seshCookie = request.cookies;
+    console.log(seshCookie);
 });
 
 //POST method to create a chat message
@@ -42,14 +49,17 @@ app.post("/message", function (request, response) {
 });
 
 io.on("connection", function (socket) {
+    
     socket.on("newUser", function (data) {
         participants.push({
             id: data.id,
-            name: data.name
+            name: data.name,
+            cook: seshCookie
         });
         io.sockets.emit("newConnection", {
             participants: participants
         });
+        //console.log(data.id);
     });
 
     socket.on("nameChange", function (data) {
@@ -71,7 +81,8 @@ io.on("connection", function (socket) {
             sender: "system"
         });
     });
-
+    
+    console.log(participants)
 });
 
 http.listen(app.get("port"), app.get("ipaddr"), function () {
