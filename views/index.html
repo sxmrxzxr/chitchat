@@ -9,19 +9,8 @@
     <title>ChitChat</title>
   </head>
   <body>
-    <h1>ChitChat</h1>
-    <div>
-      <div class="inlineBlock"><span>Your Name:
-          <input type="text" value="Anonymous" id="name"></span><br>
-        <form id="messageForm">
-          <textarea rows="4" cols="50" placeholder="share something" maxLength="200" id="outgoingMessage"></textarea>
-          <input type="button" value="Share" disabled id="send">
-        </form>
-      </div>
-      <div class="inlineBlock topAligned"><b>Participants</b><br>
-        <div id="participants"></div>
-      </div>
-    </div>
+    <div id="content"></div>
     <div id="messages"></div>
+    <script src="../public/js/bundle.js"></script>
   </body>
 </html>
