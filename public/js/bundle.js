@@ -44,28 +44,86 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/** @jsx React.DOM */var React = __webpack_require__(1);
+	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(33);
-	var InlineBlock = __webpack_require__(168)
-	var Participants = __webpack_require__(169)
 
-	var MainBody = React.createClass({displayName: "MainBody",
-	  render: function(){
-	    return(
-	      React.createElement("div", null, 
-	        React.createElement("h1", null, "ChitChat"), 
-	        React.createElement(InlineBlock, null), 
-	        React.createElement(Participants, null)
-	      )
+	var Participants = React.createClass({
+	  displayName: 'Participants',
+
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      { className: 'inlineBlock topAligned' },
+	      React.createElement(
+	        'b',
+	        null,
+	        'Participants'
+	      ),
+	      React.createElement('br', null),
+	      React.createElement('div', { id: 'participants' })
 	    );
 	  }
 	});
 
-	ReactDOM.render(
-	  React.createElement(MainBody, null),
-	  document.getElementById('content')
-	);
+	var NameField = React.createClass({
+	  displayName: 'NameField',
 
+	  render: function () {
+	    return React.createElement(
+	      'span',
+	      null,
+	      'Your Name:',
+	      React.createElement('input', { type: 'text', value: 'Anonymous', id: 'name' })
+	    );
+	  }
+	});
+
+	var MessageForm = React.createClass({
+	  displayName: 'MessageForm',
+
+	  render: function () {
+	    return React.createElement(
+	      'form',
+	      { id: 'messageForm' },
+	      React.createElement('textarea', { rows: '4', cols: '50', placeholder: 'share something', maxLength: '200', id: 'outgoingMessage' }),
+	      React.createElement('input', { type: 'button', value: 'Share', disabled: true, id: 'send' })
+	    );
+	  }
+	});
+
+	var InlineBlock = React.createClass({
+	  displayName: 'InlineBlock',
+
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      { className: 'inlineBlock' },
+	      React.createElement(NameField, null),
+	      React.createElement('br', null),
+	      React.createElement(MessageForm, null)
+	    );
+	  }
+	});
+
+	var MainBody = React.createClass({
+	  displayName: 'MainBody',
+
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'h1',
+	        null,
+	        'ChitChat'
+	      ),
+	      React.createElement(InlineBlock, null),
+	      React.createElement(Participants, null)
+	    );
+	  }
+	});
+
+	ReactDOM.render(React.createElement(MainBody, null), document.getElementById('content'));
 
 /***/ },
 /* 1 */
@@ -20157,66 +20215,6 @@
 	var ReactMount = __webpack_require__(158);
 
 	module.exports = ReactMount.renderSubtreeIntoContainer;
-
-/***/ },
-/* 168 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/** @jsx React.DOM */var React = __webpack_require__(1);
-
-	var NameField = React.createClass({displayName: "NameField",
-	  render: function(){
-	    return(
-	      React.createElement("span", null, 
-	        "Your Name:", 
-	        React.createElement("input", {type: "text", value: "Anonymous", id: "name"})
-	      )
-	    );
-	  }
-	});
-
-	var MessageForm = React.createClass({displayName: "MessageForm",
-	  render: function(){
-	    return(
-	      React.createElement("form", {id: "messageForm"}, 
-	        React.createElement("textarea", {rows: "4", cols: "50", placeholder: "share something", maxLength: "200", id: "outgoingMessage"}), 
-	        React.createElement("input", {type: "button", value: "Share", disabled: true, id: "send"})
-	      )
-	    );
-	  }
-	});
-
-	module.exports = React.createClass({displayName: "module.exports",
-	  render: function(){
-	    return(
-	      React.createElement("div", {className: "inlineBlock"}, 
-	        React.createElement(NameField, null), 
-	        React.createElement("br", null), 
-	        React.createElement(MessageForm, null)
-	      )
-	    );
-	  }
-	});
-
-
-/***/ },
-/* 169 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/** @jsx React.DOM */var React = __webpack_require__(1);
-
-	module.exports = React.createClass({displayName: "module.exports",
-	  render:function(){
-	    return(
-	      React.createElement("div", {className: "inlineBlock topAligned"}, 
-	        React.createElement("b", null, "Participants"), 
-	        React.createElement("br", null), 
-	        React.createElement("div", {id: "participants"})
-	      )
-	    );
-	  }
-	})
-
 
 /***/ }
 /******/ ]);
