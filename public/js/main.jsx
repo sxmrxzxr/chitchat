@@ -77,8 +77,6 @@ var MainBody = React.createClass({
       });
     });
     socket.on('newConnection', function(data) {
-      //this.setState({data: data});
-      console.log(data);
       this.setState({data:data});
     }.bind(this));
     socket.on('userDisconnected', function(data) {

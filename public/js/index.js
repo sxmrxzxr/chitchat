@@ -12,19 +12,6 @@ function init() {
     }
   }
 
-  socket.on('connect', function () {
-    sessionId = socket.io.engine.id;
-    console.log('Connected ' + sessionId);
-    socket.emit('newUser', {
-      id: sessionId,
-      name: $('#name').val()
-    });
-  });
-
-  // socket.on('newConnection', function (data) {
-  //   updateParticipants(data.participants);
-  // });
-
   socket.on('userDisconnected', function (data) {
     $('#' + data.id).remove();
   });
