@@ -3,22 +3,18 @@ function init() {
   var serverBaseUrl = document.domain;
   var socket = io.connect(serverBaseUrl);
   var sessionId = '';
+  //
+  // function updateParticipants(participants) {
+  //   $('#participants').html('');
+  //   for (var i = 0; i < participants.length; i++) {
+  //     $('#participants').append('<span id="' + participants[i].id + '">' +
+  //     participants[i].name + ' ' + (participants[i].id === sessionId ? '(You)' : '') + '<br /></span>');
+  //   }
+  // }
 
-  function updateParticipants(participants) {
-    $('#participants').html('');
-    for (var i = 0; i < participants.length; i++) {
-      $('#participants').append('<span id="' + participants[i].id + '">' +
-      participants[i].name + ' ' + (participants[i].id === sessionId ? '(You)' : '') + '<br /></span>');
-    }
-  }
-
-  socket.on('userDisconnected', function (data) {
-    $('#' + data.id).remove();
-  });
-
-  socket.on('nameChanged', function (data) {
-    $('#' + data.id).html(data.name + ' ' + (data.id === sessionId ? '(You)' : '') + '<br />');
-  });
+  // socket.on('nameChanged', function (data) {
+  //   $('#' + data.id).html(data.name + ' ' + (data.id === sessionId ? '(You)' : '') + '<br />');
+  // });
 
   socket.on('incomingMessage', function (data) {
     var message = data.message;

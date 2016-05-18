@@ -29,10 +29,14 @@ var MainBody = React.createClass({
     //TODO
     socket.on('userDisconnected', function(data) {
       console.log(data);
+      //Having this console.log makes it work but I'm not sure why
+      console.log(this.state.data);
     });
     //TODO
     socket.on('nameChanged', function(data) {
       console.log(data);
+      //Like userDisconnected, this also works. I suspect its incorrect though
+      console.log(this.state.data);
     });
     //TODO
     socket.on('incomingMessage', function(data) {

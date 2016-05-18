@@ -1,11 +1,23 @@
 var React = require('react');
 
 var NameField = React.createClass({
+  getInitialState: function() {
+    return{ value: 'Anonymous' };
+  },
+  handleChange: function(event){
+    this.setState({value: event.target.value});
+  },
   render: function(){
     return(
+      //TODO: Get this hooked up better
       <span>
         Your Name:
-        <input type="text" value="Anonymous" id="name" />
+        <input
+          type="text"
+          value={this.state.value}
+          id="name"
+          onChange={this.handleChange}
+          />
       </span>
     );
   }

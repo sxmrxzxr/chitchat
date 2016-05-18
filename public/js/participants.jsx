@@ -2,7 +2,6 @@ var React = require('react');
 
 module.exports = React.createClass({
   render:function(){
-    console.log(this.props.data);
     if(this.props.data.participants!=null) {
       var participantNodes = this.props.data.participants.map(function(user){
         return (
