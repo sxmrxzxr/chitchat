@@ -66,14 +66,18 @@ io.on("connection", function (socket) {
         var oN = _.findWhere(participants, {
             id: socket.id
         }).name;
-        _.findWhere(participants, {
-            id: socket.id
-        }).name = data.name;
-        io.sockets.emit("nameChanged", {
-            id: data.id,
-            name: data.name,
-            oldName: oN
-        });
+        
+        if (oN !== data.name) {
+               _.findWhere(participants, {
+                id: socket.id
+            }).name = data.name;
+
+            io.sockets.emit("nameChanged", {
+                id: data.id,
+                name: data.name,
+                oldName: oN
+            }); 
+        } 
         //console.log(oN);
     });
 
