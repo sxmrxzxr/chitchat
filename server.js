@@ -17,7 +17,7 @@ app.set("view engine", "jade");
 
 app.use(express.static("public", __dirname + "/public"));
 app.use(cookieParser());
-app.use(session({secret: '1234567890QWERTY'}));
+//app.use(session({secret: '1234567890QWERTY'}));
 app.use(bodyParser.json());
 
 app.get("/", function (request, response) {
@@ -63,13 +63,22 @@ io.on("connection", function (socket) {
     });
 
     socket.on("nameChange", function (data) {
-        _.findWhere(participants, {
+        var oN = _.findWhere(participants, {
             id: socket.id
-        }).name = data.name;
-        io.sockets.emit("nameChanged", {
-            id: data.id,
-            name: data.name
-        });
+        }).name;
+        
+        if (oN !== data.name) {
+               _.findWhere(participants, {
+                id: socket.id
+            }).name = data.name;
+
+            io.sockets.emit("nameChanged", {
+                id: data.id,
+                name: data.name,
+                oldName: oN
+            }); 
+        } 
+        //console.log(oN);
     });
 
     socket.on("disconnect", function () {
@@ -82,7 +91,7 @@ io.on("connection", function (socket) {
         });
     });
     
-    console.log(participants)
+    //console.log(participants)
 });
 
 http.listen(app.get("port"), app.get("ipaddr"), function () {

@@ -16,13 +16,16 @@ var InlineBlock = React.createClass({
     this.setState({text: event.target.value});
   },
   handleNameChange: function(event){
+    this.setState({name: event.target.value});
+  },
+  handleNameSubmit: function(event) {
+    event.preventDefault();
     var n = event.target.value;
     var id = sessionId;
     socket.emit('nameChange', {
       id: id,
       name: n
     });
-    this.setState({name: event.target.value});
   },
   handleSubmit: function(event) {
     event.preventDefault();
@@ -49,13 +52,15 @@ var InlineBlock = React.createClass({
     return(
       <div className="inlineBlock">
         <span>
-          Your Name:
-          <input
-            type="text"
-            value={this.state.name}
-            id="name"
-            onChange={this.handleNameChange}
-            />
+          <form onSubmit={this.handleNameSubmit}>
+            Your Name:
+            <input
+              type="text"
+              value={this.state.name}
+              id="name"
+              onChange={this.handleNameChange}
+              />
+          </form>
         </span>
         <br />
         <form id="messageForm" onSubmit={this.handleSubmit}>
@@ -88,11 +93,13 @@ var Messages = React.createClass({
       comments.push(data);
       this.setState({data:comments});
     }.bind(this));
+    // socket.on('nameChanged', function(data) {
+    // });
   },
   render: function() {
     var commentNodes = this.state.data.map(function(e) {
       return(
-        <p><b>{e.name}</b> {e.message} </p>
+        <p><b>{e.name}: </b> {e.message} </p>
       );
     });
     return(
