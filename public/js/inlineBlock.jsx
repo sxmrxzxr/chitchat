@@ -5,6 +5,8 @@ module.exports = React.createClass({
   getInitialState: function() {
     return{ name: 'Anonymous', text: '' };
   },
+  componentDidMount: function(){
+  },
   handleTextChange: function(event) {
     this.setState({text: event.target.value});
   },

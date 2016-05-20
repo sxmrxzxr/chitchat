@@ -17,7 +17,6 @@ var MainBody = React.createClass({
   },
   componentDidMount: function() {
     socket.on('connect', this.handleConnect);
-    socket.on('nameChanged', this.handleNameChanged);
     socket.on('error', this.handleError);
   },
   handleConnect: function(){
@@ -27,15 +26,6 @@ var MainBody = React.createClass({
       id: sessionId,
       name: $('#name').val()
     });
-  },
-
-  handleNameChanged: function(event) {
-    console.log(event);
-    var _participants = this.state.data;
-    console.log(_participants.find(function(e){
-      return e.id === data.id;
-    }));
-    //TODO
   },
   handleError: function(reason) {
     console.log(reason);

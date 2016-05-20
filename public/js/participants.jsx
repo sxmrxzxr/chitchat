@@ -5,15 +5,25 @@ module.exports = React.createClass({
     return {data: []};
   },
   componentDidMount: function() {
-    this.props.socket.on('newConnection', this.handleNewConnection);
-    this.props.socket.on('userDisconnected', this.handleUserDisconnected);
+    this.props.socket.on('newConnection', this.newConnection);
+    this.props.socket.on('userDisconnected', this.userDisconnected);
+    this.props.socket.on('nameChanged', this.nameChanged);
   },
-  handleNewConnection: function(data) {
+  newConnection: function(data) {
     this.setState({data:data});
   },
-  handleUserDisconnected: function(data) {
+  userDisconnected: function(data) {
     //TODO
     console.log(data);
+  },
+  nameChanged: function(event) {
+    console.log(event);
+    console.log(this.state.data);
+    // var _participants = this.state.data;
+    // console.log(_participants.find(function(e){
+    //   return e.id === data.id;
+    // }));
+    // //TODO
   },
   render:function(){
     if(this.state.data.participants!=null) {
