@@ -16,15 +16,15 @@ function init() {
   //   $('#' + data.id).html(data.name + ' ' + (data.id === sessionId ? '(You)' : '') + '<br />');
   // });
 
-  socket.on('incomingMessage', function (data) {
-    var message = data.message;
-    var name = data.name;
-    $('#messages').append('<b>' + name + ': </b>' + message + '<br />');
-  });
+  // socket.on('incomingMessage', function (data) {
+  //   var message = data.message;
+  //   var name = data.name;
+  //   $('#messages').append('<b>' + name + ': </b>' + message + '<br />');
+  // });
 
-  socket.on('error', function (reason) {
-    console.log('Unable to connect to server', reason);
-  });
+  // socket.on('error', function (reason) {
+  //   console.log('Unable to connect to server', reason);
+  // });
 
   function sendMessage() {
     var outgoingMessage = $('#outgoingMessage').val();

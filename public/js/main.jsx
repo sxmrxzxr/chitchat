@@ -6,9 +6,34 @@ var InlineBlock = require('./inlineBlock.jsx');
 var serverBaseUrl = document.domain;
 var socket = io.connect(serverBaseUrl);
 var sessionId = '';
-
 //TODO: Moved messages into this component
 
+
+var Messages = React.createClass({
+  getInitialState: function() {
+    return{data: []};
+  },
+  componentDidMount: function() {
+    socket.on('incomingMessage', function(data) {
+      console.log(data);
+      var comments = this.state.data;
+      comments.push(data);
+      this.setState({data:comments});
+    }.bind(this));
+  },
+  render: function() {
+    var commentNodes = this.state.data.map(function(e) {
+      return(
+        <p><b>{e.name}</b> {e.message} <br/></p>
+      );
+    });
+    return(
+      <div id='messages'>
+        {commentNodes}
+      </div>
+    );
+  }
+});
 
 var MainBody = React.createClass({
   getInitialState: function() {
@@ -39,10 +64,6 @@ var MainBody = React.createClass({
       console.log(this.state.data);
     });
     //TODO
-    socket.on('incomingMessage', function(data) {
-      console.log(data);
-    });
-    //TODO
     socket.on('error', function(reason){
       console.log(reason);
     });
@@ -59,6 +80,9 @@ var MainBody = React.createClass({
 });
 
 ReactDOM.render(
-  <MainBody />,
+  <div>
+    <MainBody />
+    <Messages />
+  </div>,
   document.getElementById('content')
 );
