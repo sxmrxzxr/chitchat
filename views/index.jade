@@ -5,20 +5,7 @@ html
         link(rel='stylesheet', href='/css/style.css')
         script(src='//code.jquery.com/jquery-1.11.0.min.js')
         script(src='/socket.io/socket.io.js')
-        script(src='/js/index.js')
         title ChitChat
     body
-        h1 ChitChat
-        div
-            div.inlineBlock
-                span Your name:
-                    input(type="text", value="Anonymous")#name
-                br
-                form#messageForm
-                    textarea(rows="4", cols="50", placeholder="Press Enter to share something!", maxlength=200)#outgoingMessage
-            div.inlineBlock.topAligned
-                b Participants
-                br
-                div#participants
-        div#messages
-            
+        div#content
+        script(src='/js/bundle.js')

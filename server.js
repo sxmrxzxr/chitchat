@@ -21,47 +21,36 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 
 app.get("/", function (request, response) {
-    response.render("index");
-    seshCookie = request.cookies;
-    console.log(seshCookie);
+  response.render("index");
+  seshCookie = request.cookies;
+  console.log(seshCookie);
 });
 
 //POST method to create a chat message
 app.post("/message", function (request, response) {
-    var message = request.body.message;
+  var message = request.body.message;
 
-    if (_.isUndefined(message) || _.isEmpty(message.trim())) {
-        return response.json(400, {
-            error: "Message is invalid"
-        });
-    }
-
-    var name = request.body.name;
-
-    io.sockets.emit("incomingMessage", {
-        message: message,
-        name: name
+  if (_.isUndefined(message) || _.isEmpty(message.trim())) {
+    return response.json(400, {
+      error: "Message is invalid"
     });
+  }
 
-    response.json(200, {
-        message: "Message received"
-    });
+  var name = request.body.name;
+
+  io.sockets.emit("incomingMessage", {
+    message: message,
+    name: name
+  });
+
+  response.json(200, {
+    message: "Message received"
+  });
 });
 
 io.on("connection", function (socket) {
-    
-    socket.on("newUser", function (data) {
-        participants.push({
-            id: data.id,
-            name: data.name,
-            cook: seshCookie
-        });
-        io.sockets.emit("newConnection", {
-            participants: participants
-        });
-        //console.log(data.id);
-    });
 
+<<<<<<< HEAD
     socket.on("nameChange", function (data) {
         var oN = _.findWhere(participants, {
             id: socket.id
@@ -79,21 +68,57 @@ io.on("connection", function (socket) {
             }); 
         } 
         //console.log(oN);
+=======
+  socket.on("newUser", function (data) {
+    participants.push({
+      id: data.id,
+      name: data.name,
+      cook: seshCookie
+>>>>>>> React
     });
+    io.sockets.emit("newConnection", {
+      participants: participants
+    });
+    //console.log(data.id);
+  });
 
-    socket.on("disconnect", function () {
-        participants = _.without(participants, _.findWhere(participants, {
-            id: socket.id
-        }));
-        io.sockets.emit("userDisconnected", {
-            id: socket.id,
-            sender: "system"
-        });
+  socket.on("nameChange", function (data) {
+    var oN = _.findWhere(participants, {
+      id: socket.id
+    }).name;
+    console.log(oN!=data.name);
+    if (oN != data.name) {
+      _.findWhere(participants, {
+        id: socket.id
+      }).name = data.name;
+
+      io.sockets.emit("nameChanged", {
+        id: data.id,
+        name: data.name,
+        oldName: oN
+      });
+    }
+    //console.log(oN);
+  });
+
+  socket.on("disconnect", function () {
+    participants = _.without(participants, _.findWhere(participants, {
+      id: socket.id
+    }));
+    io.sockets.emit("userDisconnected", {
+      id: socket.id,
+      sender: "system"
     });
+<<<<<<< HEAD
     
     //console.log(participants)
+=======
+  });
+
+  //console.log(participants)
+>>>>>>> React
 });
 
 http.listen(app.get("port"), app.get("ipaddr"), function () {
-    console.log("Server up and running. Go to http://" + app.get("ipaddr") + ":" + app.get("port"));
+  console.log("Server up and running. Go to http://" + app.get("ipaddr") + ":" + app.get("port"));
 });
