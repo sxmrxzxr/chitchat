@@ -1,5 +1,5 @@
 var React = require('react');
-
+var _ = require('underscore');
 module.exports = React.createClass({
   getInitialState: function() {
     return {data: []};
@@ -13,17 +13,16 @@ module.exports = React.createClass({
     this.setState({data:data});
   },
   userDisconnected: function(data) {
-    //TODO
-    console.log(data);
+    var currentUsers = this.state.data;
+    currentUsers.participants = _.without(currentUsers.participants,
+      _.findWhere(currentUsers.participants, {id: data.id}));
+    this.setState({data:currentUsers});
   },
   nameChanged: function(event) {
-    console.log(event);
-    console.log(this.state.data);
-    // var _participants = this.state.data;
-    // console.log(_participants.find(function(e){
-    //   return e.id === data.id;
-    // }));
-    // //TODO
+    var allUsers = this.state.data;
+    _.findWhere(allUsers.participants,
+      {id: event.id}).name = event.name;
+    this.setState({data:allUsers});
   },
   render:function(){
     if(this.state.data.participants!=null) {

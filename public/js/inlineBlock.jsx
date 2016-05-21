@@ -1,5 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+var _ = require('underscore');
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -19,7 +20,7 @@ module.exports = React.createClass({
     if(n==null){
       n='';
     }
-    var id = this.props.sessionId;
+    var id = this.props.socket.io.engine.id;
     this.props.socket.emit('nameChange', {
       id: id,
       name: n
@@ -56,6 +57,7 @@ module.exports = React.createClass({
               type="text"
               value={this.state.name}
               id="name"
+              ref="name"
               onChange={this.handleNameFieldChange}
               />
           </form>

@@ -63,7 +63,6 @@ io.on("connection", function (socket) {
   });
 
   socket.on("nameChange", function (data) {
-    console.log(data);
     var oN = _.findWhere(participants, {
       id: socket.id
     }).name;
