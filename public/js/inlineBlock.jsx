@@ -41,6 +41,7 @@ module.exports = React.createClass({
       })
     });
     ReactDOM.findDOMNode(this.refs.message).value = '';
+    this.setState({text: ''});
   },
   handleKeyPress: function(event) {
     if(event.key === 'Enter') {
