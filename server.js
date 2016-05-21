@@ -50,31 +50,11 @@ app.post("/message", function (request, response) {
 
 io.on("connection", function (socket) {
 
-<<<<<<< HEAD
-    socket.on("nameChange", function (data) {
-        var oN = _.findWhere(participants, {
-            id: socket.id
-        }).name;
-        
-        if (oN !== data.name) {
-               _.findWhere(participants, {
-                id: socket.id
-            }).name = data.name;
-
-            io.sockets.emit("nameChanged", {
-                id: data.id,
-                name: data.name,
-                oldName: oN
-            }); 
-        } 
-        //console.log(oN);
-=======
   socket.on("newUser", function (data) {
     participants.push({
       id: data.id,
       name: data.name,
       cook: seshCookie
->>>>>>> React
     });
     io.sockets.emit("newConnection", {
       participants: participants
@@ -109,14 +89,9 @@ io.on("connection", function (socket) {
       id: socket.id,
       sender: "system"
     });
-<<<<<<< HEAD
-    
-    //console.log(participants)
-=======
   });
 
-  //console.log(participants)
->>>>>>> React
+
 });
 
 http.listen(app.get("port"), app.get("ipaddr"), function () {
