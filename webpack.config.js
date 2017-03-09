@@ -9,7 +9,7 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/,
-        loader: 'babel',
+        loader: 'babel-loader',
         query: {
           presets: ['react']
         }
@@ -20,6 +20,6 @@ module.exports = {
 
   },
   resolve:{
-    extensions: ['', '.jsx', '.js']
+    extensions: ['.jsx', '.js']
   }
 }
